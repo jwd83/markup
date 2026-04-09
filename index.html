@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Clipboard Markup</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="app-shell" data-has-document="false">
+      <header class="topbar">
+        <div class="brand-block">
+          <div class="eyebrow">Static Annotation Tool</div>
+          <h1>Clipboard Markup</h1>
+        </div>
+
+        <div class="toolbar-grid">
+          <section class="toolbar-group">
+            <div class="group-label">Document</div>
+            <div class="control-row">
+              <button id="openButton" class="button button-primary">Open</button>
+              <button id="copyButton" class="button" disabled>Copy PNG</button>
+              <div class="save-controls">
+                <select id="exportFormat" class="select" disabled>
+                  <option value="png">PNG</option>
+                  <option value="jpeg">JPEG</option>
+                  <option value="webp">WebP</option>
+                </select>
+                <div id="qualityWrap" class="quality-wrap is-hidden">
+                  <label for="exportQuality">Quality</label>
+                  <input
+                    id="exportQuality"
+                    type="range"
+                    min="0.5"
+                    max="1"
+                    step="0.01"
+                    value="0.92"
+                  />
+                  <output id="qualityValue">92%</output>
+                </div>
+                <button id="saveButton" class="button" disabled>Save</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="toolbar-group">
+            <div class="group-label">History</div>
+            <div class="control-row">
+              <button id="undoButton" class="button" disabled>Undo</button>
+              <button id="redoButton" class="button" disabled>Redo</button>
+            </div>
+          </section>
+
+          <section class="toolbar-group">
+            <div class="group-label">View</div>
+            <div class="control-row">
+              <button id="fitButton" class="button" disabled>Fit</button>
+              <button id="actualSizeButton" class="button" disabled>100%</button>
+              <button id="zoomOutButton" class="button" disabled>-</button>
+              <button id="zoomInButton" class="button" disabled>+</button>
+              <div id="zoomReadout" class="pill">--</div>
+            </div>
+          </section>
+
+          <section class="toolbar-group">
+            <div class="group-label">Tools</div>
+            <div class="control-row tool-row" id="toolRow">
+              <button class="button is-tool is-active" data-tool="select" disabled>Select</button>
+              <button class="button is-tool" data-tool="pen" disabled>Pen</button>
+              <button class="button is-tool" data-tool="highlight" disabled>Highlight</button>
+              <button class="button is-tool" data-tool="eraser" disabled>Eraser</button>
+              <button class="button is-tool" data-tool="arrow" disabled>Arrow</button>
+              <button class="button is-tool" data-tool="text" disabled>Text</button>
+            </div>
+          </section>
+
+          <section class="toolbar-group">
+            <div class="group-label">Style</div>
+            <div class="control-row style-row">
+              <label class="color-control" for="colorPicker">
+                <span>Color</span>
+                <input id="colorPicker" type="color" value="#ff4f3f" disabled />
+              </label>
+
+              <div id="widthControls" class="chip-group" aria-label="Width presets"></div>
+
+              <div id="textControls" class="text-controls">
+                <select id="fontFamilySelect" class="select" disabled></select>
+                <select id="fontSizeSelect" class="select" disabled></select>
+                <button id="boldToggle" class="button" disabled>B</button>
+                <button id="italicToggle" class="button" disabled>I</button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <section class="canvas-area">
+          <div
+            id="dropTarget"
+            class="drop-target"
+            tabindex="0"
+            aria-label="Canvas workspace"
+          >
+            <div id="emptyState" class="empty-state">
+              <div class="empty-state-card">
+                <p class="empty-kicker">Ready for screenshots, mockups, and receipts</p>
+                <h2>Paste, drop, or open an image</h2>
+                <p>
+                  Use <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>V</kbd>, drag a file in,
+                  or open one from disk.
+                </p>
+                <button id="emptyOpenButton" class="button button-primary">Open an Image</button>
+              </div>
+            </div>
+
+            <div id="dragOverlay" class="drag-overlay is-hidden">
+              <div class="drag-overlay-card">Drop an image to replace the current document</div>
+            </div>
+
+            <div id="viewport" class="viewport is-disabled">
+              <div id="stage" class="stage">
+                <canvas id="displayCanvas"></canvas>
+                <textarea
+                  id="textEditor"
+                  class="text-editor is-hidden"
+                  spellcheck="false"
+                  aria-label="Text annotation editor"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <aside class="layers-panel">
+          <div class="layers-header">
+            <div>
+              <div class="eyebrow">Stack</div>
+              <h2>Layers</h2>
+            </div>
+          </div>
+          <div id="layerList" class="layer-list"></div>
+        </aside>
+      </main>
+    </div>
+
+    <input id="fileInput" type="file" accept="image/*" hidden />
+    <div id="toast" class="toast is-hidden" role="status" aria-live="polite"></div>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>
