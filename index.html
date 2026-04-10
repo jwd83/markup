@@ -10,16 +10,14 @@
     <div class="app-shell" data-has-document="false">
       <header class="topbar">
         <div class="brand-block">
-          <div class="eyebrow">Static Annotation Tool</div>
-          <h1>Clipboard Markup</h1>
+          <h1>Markup</h1>
         </div>
 
         <div class="toolbar-grid">
           <section class="toolbar-group">
-            <div class="group-label">Document</div>
             <div class="control-row">
               <button id="openButton" class="button button-primary">Open</button>
-              <button id="copyButton" class="button" disabled>Copy PNG</button>
+              <button id="copyButton" class="button" disabled>Copy</button>
               <div class="save-controls">
                 <select id="exportFormat" class="select" disabled>
                   <option value="png">PNG</option>
@@ -27,7 +25,7 @@
                   <option value="webp">WebP</option>
                 </select>
                 <div id="qualityWrap" class="quality-wrap is-hidden">
-                  <label for="exportQuality">Quality</label>
+                  <label for="exportQuality">Q</label>
                   <input
                     id="exportQuality"
                     type="range"
@@ -44,7 +42,6 @@
           </section>
 
           <section class="toolbar-group">
-            <div class="group-label">History</div>
             <div class="control-row">
               <button id="undoButton" class="button" disabled>Undo</button>
               <button id="redoButton" class="button" disabled>Redo</button>
@@ -52,10 +49,9 @@
           </section>
 
           <section class="toolbar-group">
-            <div class="group-label">View</div>
             <div class="control-row">
               <button id="fitButton" class="button" disabled>Fit</button>
-              <button id="actualSizeButton" class="button" disabled>100%</button>
+              <button id="actualSizeButton" class="button" disabled>1:1</button>
               <button id="zoomOutButton" class="button" disabled>-</button>
               <button id="zoomInButton" class="button" disabled>+</button>
               <div id="zoomReadout" class="pill">--</div>
@@ -63,7 +59,6 @@
           </section>
 
           <section class="toolbar-group">
-            <div class="group-label">Tools</div>
             <div class="control-row tool-row" id="toolRow">
               <button class="button is-tool is-active" data-tool="select" disabled>Select</button>
               <button class="button is-tool" data-tool="pen" disabled>Pen</button>
@@ -75,11 +70,10 @@
           </section>
 
           <section class="toolbar-group">
-            <div class="group-label">Style</div>
             <div class="control-row style-row">
               <label class="color-control" for="colorPicker">
                 <span>Color</span>
-                <input id="colorPicker" type="color" value="#ff4f3f" disabled />
+                <input id="colorPicker" type="color" value="#3b82f6" disabled />
               </label>
 
               <div id="widthControls" class="chip-group" aria-label="Width presets"></div>
@@ -87,8 +81,8 @@
               <div id="textControls" class="text-controls">
                 <select id="fontFamilySelect" class="select" disabled></select>
                 <select id="fontSizeSelect" class="select" disabled></select>
-                <button id="boldToggle" class="button" disabled>B</button>
-                <button id="italicToggle" class="button" disabled>I</button>
+                <button id="boldToggle" class="button" disabled><strong>B</strong></button>
+                <button id="italicToggle" class="button" disabled><em>I</em></button>
               </div>
             </div>
           </section>
@@ -105,13 +99,11 @@
           >
             <div id="emptyState" class="empty-state">
               <div class="empty-state-card">
-                <p class="empty-kicker">Ready for screenshots, mockups, and receipts</p>
                 <h2>Paste, drop, or open an image</h2>
                 <p>
-                  Use <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>V</kbd>, drag a file in,
-                  or open one from disk.
+                  <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>V</kbd> to paste, or drag a file here.
                 </p>
-                <button id="emptyOpenButton" class="button button-primary">Open an Image</button>
+                <button id="emptyOpenButton" class="button button-primary">Open</button>
               </div>
             </div>
 
@@ -135,10 +127,7 @@
 
         <aside class="layers-panel">
           <div class="layers-header">
-            <div>
-              <div class="eyebrow">Stack</div>
-              <h2>Layers</h2>
-            </div>
+            <h2>Layers</h2>
           </div>
           <div id="layerList" class="layer-list"></div>
         </aside>
