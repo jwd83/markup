@@ -1302,7 +1302,7 @@ function commitTextEdit() {
   const nextObject = {
     id: baseObject?.id ?? createObjectId("text"),
     type: "text",
-    visible: true,
+    visible: baseObject?.visible ?? true,
     x: state.textEditorState.x,
     y: state.textEditorState.y,
     text: content,
@@ -1311,8 +1311,7 @@ function commitTextEdit() {
     fontSize: style.fontSize,
     bold: style.bold,
     italic: style.italic,
-    visible: baseObject?.visible ?? true,
-  }
+  };
 
   if (!content.trim()) {
     state.activeTool = state.textEditorState.returnTool;
@@ -1600,6 +1599,7 @@ function handleCanvasPointerDown(event) {
       return;
     }
     if (hit.object.type === "text" && event.detail >= 2) {
+      event.preventDefault();
       beginTextEdit({ x: hit.object.x, y: hit.object.y, object: hit.object });
       return;
     }
@@ -1623,7 +1623,9 @@ function handleCanvasPointerDown(event) {
   }
 
   if (state.activeTool === "text") {
+    event.preventDefault();
     beginTextEdit({ x: point.x, y: point.y });
+    return;
   }
 }
 
